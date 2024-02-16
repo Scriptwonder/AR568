@@ -40,7 +40,7 @@ namespace MyFirstARGame
         {
             var playerName = $"Player {newPlayer.ActorNumber}";
             var currentScore = this.scoreboard.GetScore(playerName);
-            this.photonView.RPC("Network_SetScore", player, playerName, currentScore);
+            this.photonView.RPC("Network_SetScore", newPlayer, playerName, currentScore);
         }
     }
 
