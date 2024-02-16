@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6068959599356134711}
   - component: {fileID: 5055995115842406564}
   - component: {fileID: 4608888377164664123}
+  - component: {fileID: 7800268241268476312}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -45,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bbcefb26b3a0bc49b0941fd6bca6e4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreboard: {fileID: 7800268241268476312}
 --- !u!114 &4608888377164664123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,3 +69,15 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &7800268241268476312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766730935116285964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82d97eb529331c745ba94bacd8c95e0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
