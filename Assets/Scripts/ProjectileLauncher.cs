@@ -41,11 +41,11 @@
             rigidbody.isKinematic = false;
             rigidbody.velocity = ray.direction * initialSpeed;
 
-            var networkCommunication = FindObjectOfType<NetworkCommunication>();
-            if (networkCommunication != null)
-            {
-                networkCommunication.IncrementScore();
-            }
+            //var networkCommunication = FindObjectOfType<NetworkCommunication>();
+            //if (networkCommunication != null)
+            //{
+            //    networkCommunication.IncrementScore();
+            //}
         }
     }
 }

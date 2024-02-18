@@ -7,6 +7,7 @@ namespace MyFirstARGame
     public class Scoreboard : MonoBehaviour
     {
         private Dictionary<string, int> scores = new Dictionary<string, int>();
+        private Dictionary<string, Dictionary<string, int>> targetScores = new Dictionary<string, Dictionary<string, int>>();
         // Start is called before the first frame update
         void Start()
         {
@@ -31,11 +32,36 @@ namespace MyFirstARGame
             }
         }
 
+        public void SetScore(string playerName, int score, string t)
+        {
+            if (targetScores.ContainsKey(playerName))
+            {
+                targetScores[playerName][t] = score;
+            }
+            else
+            {
+                targetScores.Add(playerName, new Dictionary<string, int>());
+                targetScores[playerName].Add(t, score);
+            }
+        }
+
         public int GetScore(string playerName)
         {
             if (scores.ContainsKey(playerName))
             {
                 return this.scores[playerName];
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public int GetScore(string playerName, string target)
+        {
+            if (scores.ContainsKey(playerName))
+            {
+                return this.targetScores[playerName][target];
             }
             else
             {
