@@ -14,10 +14,16 @@
 
         [SerializeField]
         private float initialSpeed = 25;
+        [SerializeField]
+        private bool canFire = false;
 
+        private void Start()
+        {
+            canFire = false;
+        }
         protected override void OnPressBegan(Vector3 position)
         {
-            if (this.projectilePrefab == null || !NetworkLauncher.Singleton.HasJoinedRoom)
+            if (this.projectilePrefab == null || !NetworkLauncher.Singleton.HasJoinedRoom || !canFire)
                 return;
 
             // Ensure user is not doing anything else.
@@ -46,6 +52,16 @@
             //{
             //    networkCommunication.IncrementScore();
             //}
+        }
+
+        public void OpenFire()
+        {
+            canFire = true;
+        }
+
+        public void StopFire()
+        {
+            canFire = false;
         }
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public enum TargetType
 {
-    One,
-    Three,
-    Five,
+    One = 1,
+    Three = 3,
+    Five = 5,
 }
 
 namespace MyFirstARGame
@@ -16,10 +16,15 @@ namespace MyFirstARGame
         // Start is called before the first frame update
         [SerializeField] private TargetType type;
         [SerializeField] private string id;
+        [SerializeField] public bool beShooted;
         [SerializeField] NetworkCommunication networkCommunication;
+        [SerializeField] private Material material;
         void Start()
         {
             networkCommunication = FindObjectOfType<NetworkCommunication>();
+            SetID(gameObject.name);
+            beShooted = false;
+            material = GetComponent<MeshRenderer>().material;
         }
 
         // Update is called once per frame
@@ -35,9 +40,10 @@ namespace MyFirstARGame
                 Debug.Log("Hit : " +  gameObject.name + " : " + type);
                 if(networkCommunication != null)
                 {
-                    networkCommunication.UpdateTargetScore(this);
+                    networkCommunication.UpdateTargetScore(this.GetID());
                 }
                 other.GetComponent<ProjectileBehaviour>().Bounce();
+                material.color = other.GetComponent<MeshRenderer>().material.color;
             }
         }
 
@@ -49,6 +55,11 @@ namespace MyFirstARGame
         public string GetID()
         {
             return id;
+        }
+
+        new public TargetType GetType()
+        {
+            return type;
         }
     }
 }

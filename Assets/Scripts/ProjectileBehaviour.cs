@@ -13,7 +13,12 @@ namespace MyFirstARGame
 
         [SerializeField] private int bounceCount = 0;
         [SerializeField] private int maxBounceTime = 3;
-        [SerializeField] private float destroyTime = 1.0f;
+        [SerializeField] private float destroyTime = 6.0f;
+        private float timer;
+        private void Start()
+        {
+            timer = destroyTime;
+        }
         private void Awake()
         {
             // Pick a material based on our player number so that we can distinguish between projectiles. We use the player number
@@ -28,12 +33,20 @@ namespace MyFirstARGame
             }
         }
 
+        private void Update()
+        {
+            timer -= Time.deltaTime;
+            if(timer < 0 )
+            {
+                Destroy(gameObject);
+            }
+        }
         public void Bounce()
         {
             bounceCount++;
             if(bounceCount > maxBounceTime)
             {
-                Destroy(gameObject, destroyTime);
+                Destroy(gameObject, 1);
             }
         }
     }

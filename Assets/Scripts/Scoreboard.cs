@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 namespace MyFirstARGame
 {
     public class Scoreboard : MonoBehaviour
     {
         private Dictionary<string, int> scores = new Dictionary<string, int>();
-        private Dictionary<string, Dictionary<string, int>> targetScores = new Dictionary<string, Dictionary<string, int>>();
+        //<Cube ID, PlayerName>
+        private Dictionary<string, string> targetScores = new Dictionary<string, string>();
         // Start is called before the first frame update
         void Start()
         {
@@ -32,17 +34,17 @@ namespace MyFirstARGame
             }
         }
 
-        public void SetScore(string playerName, int score, string t)
+        public void SetScore(string playerName, string t)
         {
-            if (targetScores.ContainsKey(playerName))
+            if (targetScores.ContainsKey(t))
             {
-                targetScores[playerName][t] = score;
+                targetScores[t] = playerName;
             }
             else
             {
-                targetScores.Add(playerName, new Dictionary<string, int>());
-                targetScores[playerName].Add(t, score);
+                targetScores.Add(t, playerName);
             }
+            TargetLauncher.Instance.CheckTargetsStatus();
         }
 
         public int GetScore(string playerName)
@@ -57,16 +59,18 @@ namespace MyFirstARGame
             }
         }
 
-        public int GetScore(string playerName, string target)
+        public Dictionary<string, string>  GetResult()
         {
-            if (scores.ContainsKey(playerName))
+            return targetScores;
+        }
+
+        public string GetScore(Target target)
+        {
+            if (scores.ContainsKey(target.GetID()))
             {
-                return this.targetScores[playerName][target];
+                return this.targetScores[target.GetID()];
             }
-            else
-            {
-                return 0;
-            }
+            return "Draw";
         }
 
         public void RemovePlayer(string playerName)
