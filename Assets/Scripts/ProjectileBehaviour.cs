@@ -11,6 +11,9 @@ namespace MyFirstARGame
         [SerializeField]
         private Material[] projectileMaterials;
 
+        [SerializeField] private int bounceCount = 0;
+        [SerializeField] private int maxBounceTime = 3;
+        [SerializeField] private float destroyTime = 1.0f;
         private void Awake()
         {
             // Pick a material based on our player number so that we can distinguish between projectiles. We use the player number
@@ -22,6 +25,15 @@ namespace MyFirstARGame
             {
                 var material = this.projectileMaterials[playerId % this.projectileMaterials.Length];
                 this.transform.GetComponent<Renderer>().material = material;
+            }
+        }
+
+        public void Bounce()
+        {
+            bounceCount++;
+            if(bounceCount > maxBounceTime)
+            {
+                Destroy(gameObject, destroyTime);
             }
         }
     }

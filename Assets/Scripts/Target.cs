@@ -37,6 +37,7 @@ namespace MyFirstARGame
                 {
                     networkCommunication.UpdateTargetScore(this);
                 }
+                other.GetComponent<ProjectileBehaviour>().Bounce();
             }
         }
 
