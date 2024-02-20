@@ -21,10 +21,11 @@ namespace MyFirstARGame
         [SerializeField] public bool beShooted;
         [SerializeField] NetworkCommunication networkCommunication;
         [SerializeField] private Material material;
-        void Start()
+        void Awake()
         {
             networkCommunication = FindObjectOfType<NetworkCommunication>();
-            SetID(gameObject.name);
+            //int i = this.gameObject.getComponent<PhotonView>().ViewID;
+            SetID(this.gameObject.name);
             beShooted = false;
             material = GetComponent<MeshRenderer>().material;
         }
@@ -61,7 +62,7 @@ namespace MyFirstARGame
 
         public string GetID()
         {
-            return id;
+            return this.id;
         }
 
         new public TargetType GetType()

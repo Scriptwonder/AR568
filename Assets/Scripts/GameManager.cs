@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace MyFirstARGame
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : MonoBehaviourPun
     {
         [SerializeField] private int MaxPlayerNum = 1;
         [SerializeField] private float StartCountDownTime = 3.0f;
@@ -96,6 +96,15 @@ namespace MyFirstARGame
 
             //Show UI Changes
             scoreboard.SetScoreText();
+            var playerName = $"Player {photonView.Owner.ActorNumber}";
+            if (scoreboard.winner == playerName)
+            {
+                countdownText.text = "You Win!";
+            }
+            else
+            {
+                countdownText.text = "You Lose!";
+            }
 
         }
 

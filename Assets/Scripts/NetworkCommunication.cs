@@ -13,6 +13,8 @@ namespace MyFirstARGame
         // Start is called before the first frame update
         void Start()
         {
+            //var playerName = $"Player {photonView.Owner.ActorNumber}";
+            //GameManager.Instance.playerName = playerName;
 
         }
 
@@ -25,6 +27,7 @@ namespace MyFirstARGame
         public void IncrementScore()
         {
             var playerName = $"Player {photonView.Owner.ActorNumber}";
+            //GameManager.Instance.playerName = playerName;
             var currentScore = this.scoreboard.GetScore(playerName);
             this.photonView.RPC("Network_SetScore", RpcTarget.All, playerName, currentScore + 1);
         }
@@ -40,6 +43,7 @@ namespace MyFirstARGame
         {
             Debug.Log($"Target {target} belong to {playerName}");
             this.scoreboard.SetScore(playerName, target);
+            this.scoreboard.SetScoreText();
         }
 
         [PunRPC]
@@ -47,6 +51,7 @@ namespace MyFirstARGame
         {
             Debug.Log($"Player {playerName} has a score of {score}");
             this.scoreboard.SetScore(playerName, score);
+            this.scoreboard.SetScoreText();
         }
 
         public void UpdateForNewPlayer(Photon.Realtime.Player newPlayer)

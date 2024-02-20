@@ -14,6 +14,8 @@ namespace MyFirstARGame
         private Dictionary<string, string> targetScores = new Dictionary<string, string>();
         private Dictionary<string, int> result = new Dictionary<string, int>();
 
+        public string winner;
+
         [SerializeField] private Text text;
         // Start is called before the first frame update
         void Start()
@@ -76,10 +78,15 @@ namespace MyFirstARGame
 
             foreach (var targetScore in targetScores)
             {
-                result[targetScore.Value] += TargetLauncher.Instance.targetScores[targetScore.Key];
+                //Debug.Log(targetScore.Key + " : " + targetScore.Value);
+                //Debug.Log(TargetLauncher.Instance.targetScores.Count);
+                if (TargetLauncher.Instance.targetScores.ContainsKey(targetScore.Key)) {
+                    result[targetScore.Value] += TargetLauncher.Instance.targetScores[targetScore.Key];
+                }
             }
 
             var targetResults = result.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+            winner = targetResults.First().Key;
             foreach (var player in targetResults) 
             {
                 text.text += player.Key + ": " + player.Value + "\n";

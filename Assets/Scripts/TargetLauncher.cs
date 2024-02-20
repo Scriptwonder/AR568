@@ -50,15 +50,22 @@ namespace MyFirstARGame
             {
                 Destroy(gameObject);
             }
-            targets.SetActive(false);
+            
+        }
+
+        void Start()
+        {
+            //targets.SetActive(false);
+            //Debug.Log("1111" + targetScores.Count);
             foreach(var target in targets.GetComponentsInChildren<Target>())
             {
                 targetList.Add(target);
                 targetScores.Add(target.GetID(), (int)target.GetType());
             }
+            //Debug.Log("1111" + targetScores.Count);
         }
-        void Start()
-        {
+        // void Start()
+        // {
             //if (PhotonNetwork.IsMasterClient)
             //{
             //    Vector3 origin = GetComponent<Camera>().transform.position;
@@ -99,7 +106,7 @@ namespace MyFirstARGame
             //{
             //    Debug.Log("I'm not Master");
             //}
-        }
+        //}
 
         public void LoadTargets()
         {
