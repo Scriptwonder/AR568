@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UI;
 
 namespace MyFirstARGame
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private int MaxPlayerNum = 2;
+        [SerializeField] private int MaxPlayerNum = 1;
         [SerializeField] private float StartCountDownTime = 3.0f;
         [SerializeField] private float GameCountDownTime = 30.0f;
         [SerializeField] private float OverCountDownTime = 10.0f;
@@ -17,6 +18,8 @@ namespace MyFirstARGame
         private bool startCountDown = false;
         private bool gameStarted = false;
         private bool overCountDown = false;
+
+        public Text countdownText;
         float timer = 0;
         void Awake()
         {
@@ -50,8 +53,10 @@ namespace MyFirstARGame
             if(startCountDown)
             {
                 timer += Time.deltaTime;
+                
                 if(timer > StartCountDownTime)
                 {
+                    
                     timer = 0;
                     startCountDown = false;
                     gameStarted = true;
@@ -62,8 +67,10 @@ namespace MyFirstARGame
             if(gameStarted)
             {
                 timer += Time.deltaTime;
+                countdownText.text = ((int)(GameCountDownTime - timer)).ToString();
                 if(timer > GameCountDownTime)
                 {
+                    countdownText.text = "00";
                     timer = 0;
                     gameStarted = false;
                     GameOver();
@@ -86,6 +93,17 @@ namespace MyFirstARGame
         {
             ProjectileBehaviour.StopFire();
             Dictionary<string, string> targetScores = scoreboard.GetResult();
+
+            //Show UI Changes
+            scoreboard.SetScoreText();
+
+        }
+
+        public void RestartGame()
+        {
+            // ProjectileBehaviour.StopFire();
+            // TargetLauncher.Instance.LoadTargets();
+            // startCountDown = true;
         }
     }
 }

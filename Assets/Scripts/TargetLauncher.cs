@@ -36,7 +36,7 @@ namespace MyFirstARGame
         [SerializeField] private GameObject fstargetPrefab;
         [SerializeField] private GameObject targets;
         [SerializeField] private List<Target> targetList = new List<Target>();
-        [SerializeField] private Dictionary<string, int> targetScores = new Dictionary<string, int>();
+        public Dictionary<string, int> targetScores = new Dictionary<string, int>();
         public static TargetLauncher Instance { get; private set; }
 
         void Awake()

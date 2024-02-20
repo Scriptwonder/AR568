@@ -3,6 +3,7 @@
     using UnityEngine;
     using UnityEngine.UI;
     using UnityEngine.XR.Interaction.Toolkit.AR;
+    using UnityEngine.SceneManagement;
 
     /// <summary>
     /// Implements UI button functionality. See <see cref="UnityEngine.XR.ARFoundation.Samples.BackButton"/> for the back button implementation.
@@ -92,6 +93,11 @@
         private void SetButtonState(GameObject button, bool state)
         {
             button.GetComponent<Image>().color = state ? Color.green : Color.white;
+        }
+
+        public void ResetScene()
+        {
+            SceneManager.LoadScene(1);
         }
     }
 }

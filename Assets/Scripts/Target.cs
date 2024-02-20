@@ -7,6 +7,8 @@ public enum TargetType
     One = 1,
     Three = 3,
     Five = 5,
+
+    Jackpot = 20
 }
 
 namespace MyFirstARGame
@@ -35,6 +37,10 @@ namespace MyFirstARGame
 
         private void OnTriggerStay(Collider other)
         {
+            if (beShooted && type == TargetType.Jackpot)
+            {
+                return;
+            }
             if(other.GetComponent<ProjectileBehaviour>() != null)
             {
                 Debug.Log("Hit : " +  gameObject.name + " : " + type);
@@ -44,6 +50,7 @@ namespace MyFirstARGame
                 }
                 other.GetComponent<ProjectileBehaviour>().Bounce();
                 material.color = other.GetComponent<MeshRenderer>().material.color;
+                beShooted = true;
             }
         }
 

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
+using UnityEngine.UI;
+using System.Linq;
 
 namespace MyFirstARGame
 {
@@ -10,6 +12,9 @@ namespace MyFirstARGame
         private Dictionary<string, int> scores = new Dictionary<string, int>();
         //<Cube ID, PlayerName>
         private Dictionary<string, string> targetScores = new Dictionary<string, string>();
+        private Dictionary<string, int> result = new Dictionary<string, int>();
+
+        [SerializeField] private Text text;
         // Start is called before the first frame update
         void Start()
         {
@@ -44,6 +49,10 @@ namespace MyFirstARGame
             {
                 targetScores.Add(t, playerName);
             }
+            if (!result.ContainsKey(playerName))
+            {
+                result.Add(playerName, 0);
+            }
             TargetLauncher.Instance.CheckTargetsStatus();
         }
 
@@ -56,6 +65,24 @@ namespace MyFirstARGame
             else
             {
                 return 0;
+            }
+        }
+
+        public void SetScoreText()
+        {
+            text.text = "Score:\n";
+            //sort targetScores based on value
+
+
+            foreach (var targetScore in targetScores)
+            {
+                result[targetScore.Value] += TargetLauncher.Instance.targetScores[targetScore.Key];
+            }
+
+            var targetResults = result.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+            foreach (var player in targetResults) 
+            {
+                text.text += player.Key + ": " + player.Value + "\n";
             }
         }
 

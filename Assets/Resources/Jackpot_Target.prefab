@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 8815155727944247351}
   - component: {fileID: -4925813923803679778}
   - component: {fileID: -7166882883348775237}
-  - component: {fileID: 7562934117106009038}
-  - component: {fileID: -6171706864676922455}
-  - component: {fileID: 6229007687128832592}
+  - component: {fileID: -6431418763775807531}
+  - component: {fileID: -7889790499373462972}
+  - component: {fileID: 237591005164048068}
   m_Layer: 0
-  m_Name: FS_Target
+  m_Name: Jackpot_Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 9183901874634772596}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.57424, z: 0.82288}
+  m_LocalScale: {x: 0.2, y: 0.11476772, z: 0.17688867}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &7562934117106009038
+--- !u!114 &-6431418763775807531
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,12 +139,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dce5e3bc027c194795369fa41f37dfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 5
+  type: 20
   id: 
   beShooted: 0
   networkCommunication: {fileID: 0}
   material: {fileID: 0}
---- !u!65 &-6171706864676922455
+--- !u!65 &-7889790499373462972
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,7 +165,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &6229007687128832592
+--- !u!65 &237591005164048068
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
