@@ -6,6 +6,8 @@ namespace MyFirstARGame
     using UnityEngine.UIElements;
     using System.Collections.Generic;
     using static UnityEngine.GraphicsBuffer;
+    using UnityEngine.UI;
+    using System.Linq;
 
     enum OneScoreTarget
     {
@@ -35,7 +37,7 @@ namespace MyFirstARGame
         [SerializeField] private GameObject tstargetPrefab;
         [SerializeField] private GameObject fstargetPrefab;
         [SerializeField] private GameObject targets;
-        [SerializeField] private List<Target> targetList = new List<Target>();
+        [SerializeField] public List<Target> targetList = new List<Target>();
         public Dictionary<string, int> targetScores = new Dictionary<string, int>();
         public static TargetLauncher Instance { get; private set; }
 
@@ -53,16 +55,20 @@ namespace MyFirstARGame
             targets.SetActive(false);
         }
 
-        void Start()
+        void OnEnable()
         {
             //targets.SetActive(false);
             //Debug.Log("1111" + targetScores.Count);
-            foreach(var target in targets.GetComponentsInChildren<Target>())
+            targetList = targets.GetComponentsInChildren<Target>().ToList();
+            //int i = 1;
+            foreach(var target in targetList)
             {
-                targetList.Add(target);
-                targetScores.Add(target.GetID(), (int)target.GetType());
+                //targetList.Add(target);
+                //Debug.Log(i++);
+                //Debug.Log(target.gameObject.name + " : " + (int)target.GetType());
+                targetScores.Add(target.gameObject.name, (int)target.GetType());
             }
-            //Debug.Log("1111" + targetScores.Count);
+            //Debug.Log("1111" + targetList.Count + " : " + targetScores.Count);
         }
 
         public void LoadTargets()

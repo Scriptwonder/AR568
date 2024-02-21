@@ -35,7 +35,8 @@ namespace MyFirstARGame
                 Destroy(gameObject);
             }
             ProjectileBehaviour = FindObjectOfType<ProjectileLauncher>();
-            scoreboard = FindObjectOfType<Scoreboard>();
+            //scoreboard = FindObjectOfType<Scoreboard>();
+            
             startCountDown = false;
             gameStarted = false;
             overCountDown = false;
@@ -102,11 +103,13 @@ namespace MyFirstARGame
         public void GameOver()
         {
             ProjectileBehaviour.StopFire();
-            Dictionary<string, string> targetScores = scoreboard.GetResult();
+            //Dictionary<string, string> targetScores = scoreboard.GetResult();
+            //Debug.Log("GameOver: " + targetScores.Count);
 
             //Show UI Changes
+            scoreboard = GameObject.Find("NetworkManager(Clone)").GetComponent<Scoreboard>();
             scoreboard.SetScoreText();
-            var playerName = $"Player {photonView.Owner.ActorNumber}";
+            var playerName = GameObject.Find("NetworkManager(Clone)").GetComponent<NetworkCommunication>().GetPlayerName();
             if (scoreboard.winner == playerName)
             {
                 countdownText.text = "You Win!";

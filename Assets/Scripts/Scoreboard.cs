@@ -22,7 +22,7 @@ namespace MyFirstARGame
         // Start is called before the first frame update
         void Start()
         {
-        
+            text = GameObject.Find("ScoreText").GetComponent<Text>();
         }
 
         // Update is called once per frame
@@ -57,7 +57,9 @@ namespace MyFirstARGame
             {
                 result.Add(playerName, 0);
             }
+            //Debug.Log(result.Count + " : " + playerName);
             TargetLauncher.Instance.CheckTargetsStatus();
+            //Debug.Log("SetScore: " + targetScores.Count + t);
         }
 
         public int GetScore(string playerName)
@@ -77,21 +79,25 @@ namespace MyFirstARGame
             //text.text = "Score:\n";
             //sort targetScores based on value
 
-
+            //Debug.Log("SetScoreText: " + targetScores.Count);
             foreach (var targetScore in targetScores)
             {
                 //Debug.Log(targetScore.Key + " : " + targetScore.Value);
+                //Debug.Log(TargetLauncher.Instance.targetList.Count);
                 //Debug.Log(TargetLauncher.Instance.targetScores.Count);
+
                 if (TargetLauncher.Instance.targetScores.ContainsKey(targetScore.Key)) {
+                    //Debug.Log(targetScore.Value + " : " + TargetLauncher.Instance.targetScores[targetScore.Key]);
                     result[targetScore.Value] += TargetLauncher.Instance.targetScores[targetScore.Key];
                 }
+                //Debug.Log(targetScore.Value + " : " + result[targetScore.Value]);
             }
 
             var targetResults = result.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
             winner = targetResults.First().Key;
             foreach (var player in targetResults) 
             {
-                text.text += player.Key + ": " + player.Value + "\n";
+                text.text = player.Key + ": " + player.Value + "\n";
             }
         }
 

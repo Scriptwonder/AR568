@@ -38,6 +38,11 @@ namespace MyFirstARGame
             this.photonView.RPC("Network_SetTargetScore", RpcTarget.All, playerName, target);
         }
 
+        public string GetPlayerName()
+        {
+            return $"Player {photonView.Owner.ActorNumber}";
+        }
+
         [PunRPC]
         public void Network_SetTargetScore(string playerName, string target)
         {
@@ -51,7 +56,7 @@ namespace MyFirstARGame
         {
             Debug.Log($"Player {playerName} has a score of {score}");
             this.scoreboard.SetScore(playerName, score);
-            this.scoreboard.SetScoreText();
+            //this.scoreboard.SetScoreText();
         }
 
         public void UpdateForNewPlayer(Photon.Realtime.Player newPlayer)

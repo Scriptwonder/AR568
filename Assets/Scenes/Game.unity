@@ -3776,7 +3776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6eca9261da3b9479343d476138b855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxPlayerNum: 2
+  MaxPlayerNum: 1
   StartCountDownTime: 3
   GameCountDownTime: 30
   OverCountDownTime: 10
