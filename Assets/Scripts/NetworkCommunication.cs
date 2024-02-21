@@ -34,7 +34,8 @@ namespace MyFirstARGame
 
         public void UpdateTargetScore(string target)
         {
-            var playerName = $"Player {photonView.Owner.ActorNumber}";
+            //var playerName = $"Player {photonView.Owner.ActorNumber}";
+            var playerName = GameManager.Instance.playerName;
             this.photonView.RPC("Network_SetTargetScore", RpcTarget.All, playerName, target);
         }
 
@@ -56,7 +57,7 @@ namespace MyFirstARGame
         {
             Debug.Log($"Player {playerName} has a score of {score}");
             this.scoreboard.SetScore(playerName, score);
-            //this.scoreboard.SetScoreText();
+            this.scoreboard.SetScoreText();
         }
 
         public void UpdateForNewPlayer(Photon.Realtime.Player newPlayer)

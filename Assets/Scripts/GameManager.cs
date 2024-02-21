@@ -15,6 +15,7 @@ namespace MyFirstARGame
         [SerializeField] private float OverCountDownTime = 10.0f;
         [SerializeField] private ProjectileLauncher ProjectileBehaviour;
         [SerializeField] private Scoreboard scoreboard;
+        public string playerName = "#";
         public static GameManager Instance { get; private set; }
         [SerializeField] private bool startCountDown = false;
         private bool gameStarted = false;
@@ -109,14 +110,14 @@ namespace MyFirstARGame
             //Show UI Changes
             scoreboard = GameObject.Find("NetworkManager(Clone)").GetComponent<Scoreboard>();
             scoreboard.SetScoreText();
-            var playerName = GameObject.Find("NetworkManager(Clone)").GetComponent<NetworkCommunication>().GetPlayerName();
+            //var playerName = GameObject.Find("NetworkManager(Clone)").GetComponent<NetworkCommunication>().GetPlayerName();
             if (scoreboard.winner == playerName)
             {
-                countdownText.text = "You Win!";
+                countdownText.text = playerName + ", You Win!";
             }
             else
             {
-                countdownText.text = "You Lose!";
+                countdownText.text = playerName + ", You Lose!";
             }
 
         }

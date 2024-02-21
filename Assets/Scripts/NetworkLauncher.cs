@@ -101,10 +101,11 @@ namespace MyFirstARGame
             }
 
             this.JoinedRoom?.Invoke(this);
-            if (PhotonNetwork.PlayerList.Length >= GameManager.Instance.MaxPlayerNum)
+            if (PhotonNetwork.PlayerList.Length > GameManager.Instance.MaxPlayerNum)
             {
                 GameManager.Instance.canLoadTarget = true;
             }
+            GameManager.Instance.playerName = "player" + PhotonNetwork.PlayerList.Length;
             testUI.text = ("Current Player Num : " + PhotonNetwork.PlayerList.Length);
         }
 
@@ -118,7 +119,7 @@ namespace MyFirstARGame
         {
             Debug.Log($"Player {newPlayer.ActorNumber} entered the room");
             this.NetworkCommunication?.UpdateForNewPlayer(newPlayer);
-            if (PhotonNetwork.PlayerList.Length >= GameManager.Instance.MaxPlayerNum)
+            if (PhotonNetwork.PlayerList.Length > GameManager.Instance.MaxPlayerNum)
             {
                 GameManager.Instance.canLoadTarget = true;
             }

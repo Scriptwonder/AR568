@@ -26,6 +26,7 @@ namespace MyFirstARGame
             // See ProjectileLauncher.cs for more details.
             var photonView = this.transform.GetComponent<PhotonView>();
             var playerId = Mathf.Max((int)photonView.InstantiationData[0], 0);
+
             if (this.projectileMaterials.Length > 0)
             {
                 var material = this.projectileMaterials[playerId % this.projectileMaterials.Length];

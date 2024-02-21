@@ -58,7 +58,7 @@ namespace MyFirstARGame
                 result.Add(playerName, 0);
             }
             //Debug.Log(result.Count + " : " + playerName);
-            TargetLauncher.Instance.CheckTargetsStatus();
+            //TargetLauncher.Instance.CheckTargetsStatus();
             //Debug.Log("SetScore: " + targetScores.Count + t);
         }
 

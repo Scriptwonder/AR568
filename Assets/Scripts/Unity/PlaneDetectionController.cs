@@ -30,22 +30,22 @@ namespace UnityEngine.XR.ARFoundation.Samples
         /// </summary>
         public void TogglePlaneDetection()
         {
-            m_ARPlaneManager.enabled = !m_ARPlaneManager.enabled;
+            //m_ARPlaneManager.enabled = !m_ARPlaneManager.enabled;
 
-            string planeDetectionMessage = "";
-            if (m_ARPlaneManager.enabled)
-            {
-                planeDetectionMessage = "Disable Plane Detection and Hide Existing";
-                SetAllPlanesActive(true);
-            }
-            else
-            {
-                planeDetectionMessage = "Enable Plane Detection and Show Existing";
-                SetAllPlanesActive(false);
-            }
+            //string planeDetectionMessage = "";
+            //if (m_ARPlaneManager.enabled)
+            //{
+            //    planeDetectionMessage = "Disable Plane Detection and Hide Existing";
+            //    SetAllPlanesActive(true);
+            //}
+            //else
+            //{
+            //    planeDetectionMessage = "Enable Plane Detection and Show Existing";
+            //    SetAllPlanesActive(false);
+            //}
 
-            if (togglePlaneDetectionText != null)
-                togglePlaneDetectionText.text = planeDetectionMessage;
+            //if (togglePlaneDetectionText != null)
+            //    togglePlaneDetectionText.text = planeDetectionMessage;
         }
 
         /// <summary>
