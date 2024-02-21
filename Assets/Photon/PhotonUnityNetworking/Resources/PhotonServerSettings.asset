@@ -44,6 +44,9 @@ MonoBehaviour:
   - UpdateScale
   - Network_SetScore
   - Network_SetTargetScore
+  - CheckOverCountDown
+  - LoadTarget
+  - OpenFire
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

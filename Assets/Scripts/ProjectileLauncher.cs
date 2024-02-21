@@ -19,7 +19,7 @@
 
         private void Start()
         {
-            canFire = false;
+            canFire = true;
         }
         protected override void OnPressBegan(Vector3 position)
         {

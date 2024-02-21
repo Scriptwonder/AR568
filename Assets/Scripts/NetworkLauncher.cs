@@ -2,7 +2,7 @@ namespace MyFirstARGame
 {
     using Photon.Pun;
     using UnityEngine;
-
+    using UnityEngine.UI;
     /// <summary>
     /// Enables basic network functionality by connecting to the Photon server.
     /// </summary>
@@ -25,7 +25,7 @@ namespace MyFirstARGame
         public event NetworkLauncherJoinedRoomEventHandler JoinedRoom;
 
         private bool isJoinedToRoom;
-
+        [SerializeField] private Text testUI;
         /// <summary>
         /// Gets a value indicating whether we have joined a room.
         /// </summary>
@@ -101,6 +101,11 @@ namespace MyFirstARGame
             }
 
             this.JoinedRoom?.Invoke(this);
+            if (PhotonNetwork.PlayerList.Length >= GameManager.Instance.MaxPlayerNum)
+            {
+                GameManager.Instance.canLoadTarget = true;
+            }
+            testUI.text = ("Current Player Num : " + PhotonNetwork.PlayerList.Length);
         }
 
         public override void OnLeftRoom()
@@ -113,6 +118,10 @@ namespace MyFirstARGame
         {
             Debug.Log($"Player {newPlayer.ActorNumber} entered the room");
             this.NetworkCommunication?.UpdateForNewPlayer(newPlayer);
+            if (PhotonNetwork.PlayerList.Length >= GameManager.Instance.MaxPlayerNum)
+            {
+                GameManager.Instance.canLoadTarget = true;
+            }
         }
     }
 }

@@ -21,7 +21,7 @@ namespace MyFirstARGame
         [SerializeField] public bool beShooted;
         [SerializeField] NetworkCommunication networkCommunication;
         [SerializeField] private Material material;
-        void Awake()
+        void Start()
         {
             networkCommunication = FindObjectOfType<NetworkCommunication>();
             //int i = this.gameObject.getComponent<PhotonView>().ViewID;

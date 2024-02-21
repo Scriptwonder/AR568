@@ -43,7 +43,7 @@ namespace MyFirstARGame
         {
             Debug.Log($"Target {target} belong to {playerName}");
             this.scoreboard.SetScore(playerName, target);
-            this.scoreboard.SetScoreText();
+            //this.scoreboard.SetScoreText();
         }
 
         [PunRPC]

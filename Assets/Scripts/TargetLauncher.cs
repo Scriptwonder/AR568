@@ -3,9 +3,9 @@ namespace MyFirstARGame
 {
     using UnityEngine;
     using Photon.Pun;
-    using Photon.Pun.Demo.PunBasics;
     using UnityEngine.UIElements;
     using System.Collections.Generic;
+    using static UnityEngine.GraphicsBuffer;
 
     enum OneScoreTarget
     {
@@ -26,7 +26,7 @@ namespace MyFirstARGame
     }
 
     [RequireComponent(typeof(Camera))]
-    public class TargetLauncher : MonoBehaviour
+    public class TargetLauncher : MonoBehaviourPun
     {
         [SerializeField] private int osTargetNum = 4;
         [SerializeField] private int tsTargetNum = 2;
@@ -50,7 +50,7 @@ namespace MyFirstARGame
             {
                 Destroy(gameObject);
             }
-            
+            targets.SetActive(false);
         }
 
         void Start()
@@ -64,49 +64,6 @@ namespace MyFirstARGame
             }
             //Debug.Log("1111" + targetScores.Count);
         }
-        // void Start()
-        // {
-            //if (PhotonNetwork.IsMasterClient)
-            //{
-            //    Vector3 origin = GetComponent<Camera>().transform.position;
-            //    Vector3 forward = GetComponent<Camera>().transform.forward.normalized;
-
-            //    GameObject parent = new GameObject("Targets");
-            //    for (int i = 0; i < osTargetNum; i++)
-            //    {
-            //        GameObject obj = PhotonNetwork.Instantiate(ostargetPrefab.name, origin + forward * 5 + Vector3.up * 2 + Vector3.left * (i-osTargetNum/2) * 1, 
-            //            Quaternion.identity);
-            //        obj.transform.localScale = new Vector3((float)OneScoreTarget.scale / 5.0f, (float)OneScoreTarget.scale / 5.0f, (float)OneScoreTarget.scale) / 5.0f;
-            //        obj.name = ostargetPrefab.name + i;
-            //        obj.transform.parent = parent.transform;
-            //        obj.GetComponent<Target>().SetID(obj.name);
-            //    }
-
-            //    for (int i = 0; i < tsTargetNum; i++)
-            //    {
-            //        GameObject obj = PhotonNetwork.Instantiate(tstargetPrefab.name, origin + forward * 5 + Vector3.down * 2 + Vector3.left * (i - tsTargetNum / 2) * 1, 
-            //            Quaternion.identity);
-            //        obj.transform.localScale = new Vector3((float)ThreeScoreTarget.scale / 5.0f, (float)ThreeScoreTarget.scale / 10.0f, (float)ThreeScoreTarget.scale) / 5.0f;
-            //        obj.name = tstargetPrefab.name + i;
-            //        obj.transform.parent = parent.transform;
-            //        obj.GetComponent<Target>().SetID(obj.name);
-            //    }
-
-            //    for (int i = 0; i < fsTargetNum; i++)
-            //    {
-            //        GameObject obj = PhotonNetwork.Instantiate(fstargetPrefab.name, origin + forward * 5 + Vector3.left * (i - fsTargetNum / 2) * 1, 
-            //            Quaternion.identity);
-            //        obj.transform.localScale = new Vector3((float)FiveScoreTarget.scale / 5.0f, (float)FiveScoreTarget.scale / 5.0f, (float)FiveScoreTarget.scale / 5.0f);
-            //        obj.name = fstargetPrefab.name + i;
-            //        obj.transform.parent = parent.transform;
-            //        obj.GetComponent<Target>().SetID(obj.name);
-            //    }
-            //}
-            //else
-            //{
-            //    Debug.Log("I'm not Master");
-            //}
-        //}
 
         public void LoadTargets()
         {
@@ -122,6 +79,13 @@ namespace MyFirstARGame
                     return;
                 }
             }
+            
+            photonView.RPC("CheckOverCountDown", RpcTarget.All);
+            
+        }
+        [PunRPC]
+        public void CheckOverCountDown()
+        {
             GameManager.Instance.BeginOverCountDown();
         }
     }

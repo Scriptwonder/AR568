@@ -1,26 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Photon.Pun;
-using UnityEngine.UI;
+
 
 namespace MyFirstARGame
 {
-    public class GameManager : MonoBehaviourPun
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using Photon.Pun;
+    using UnityEngine.UI;
+    public class GameManager : MonoBehaviourPunCallbacks
     {
-        [SerializeField] private int MaxPlayerNum = 1;
+        [SerializeField] public int MaxPlayerNum = 1;
         [SerializeField] private float StartCountDownTime = 3.0f;
         [SerializeField] private float GameCountDownTime = 30.0f;
         [SerializeField] private float OverCountDownTime = 10.0f;
         [SerializeField] private ProjectileLauncher ProjectileBehaviour;
         [SerializeField] private Scoreboard scoreboard;
         public static GameManager Instance { get; private set; }
-        private bool startCountDown = false;
+        [SerializeField] private bool startCountDown = false;
         private bool gameStarted = false;
         private bool overCountDown = false;
 
         public Text countdownText;
-        float timer = 0;
+        [SerializeField]float timer = 0;
+        public bool canLoadTarget = false;
         void Awake()
         {
             if (Instance == null)
@@ -41,13 +43,9 @@ namespace MyFirstARGame
 
         private void Start()
         {
-            if(PhotonNetwork.PlayerList.Length == MaxPlayerNum)
-            {
-                TargetLauncher.Instance.LoadTargets();
-                PhotonNetwork.CurrentRoom.IsOpen = false;
-                startCountDown = true;
-            }
+            
         }
+
         void Update()
         {
             if(startCountDown)
@@ -60,8 +58,13 @@ namespace MyFirstARGame
                     timer = 0;
                     startCountDown = false;
                     gameStarted = true;
-                    ProjectileBehaviour.OpenFire();
                 }
+            }
+
+            if(canLoadTarget)
+            {
+                LoadTarget();
+                canLoadTarget = false;
             }
 
             if(gameStarted)
@@ -82,9 +85,16 @@ namespace MyFirstARGame
             }
         }
 
+        public void LoadTarget()
+        {
+            TargetLauncher.Instance.LoadTargets();
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            startCountDown = true;
+        }
+
         public void BeginOverCountDown()
         {
-            if(!gameStarted) { return; }
+            if(!gameStarted || overCountDown) { return; }
             timer = GameCountDownTime - OverCountDownTime;
             overCountDown = true;
         }

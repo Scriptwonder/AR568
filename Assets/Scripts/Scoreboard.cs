@@ -4,10 +4,11 @@ using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 using UnityEngine.UI;
 using System.Linq;
+using Photon.Pun;
 
 namespace MyFirstARGame
 {
-    public class Scoreboard : MonoBehaviour
+    public class Scoreboard : MonoBehaviourPunCallbacks
     {
         private Dictionary<string, int> scores = new Dictionary<string, int>();
         //<Cube ID, PlayerName>
@@ -17,6 +18,7 @@ namespace MyFirstARGame
         public string winner;
 
         [SerializeField] private Text text;
+        
         // Start is called before the first frame update
         void Start()
         {
@@ -72,7 +74,7 @@ namespace MyFirstARGame
 
         public void SetScoreText()
         {
-            text.text = "Score:\n";
+            //text.text = "Score:\n";
             //sort targetScores based on value
 
 

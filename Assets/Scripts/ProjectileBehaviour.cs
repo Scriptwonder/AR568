@@ -6,7 +6,7 @@ namespace MyFirstARGame
     /// <summary>
     /// Controls projectile behaviour. In our case it currently only changes the material of the projectile based on the player that owns it.
     /// </summary>
-    public class ProjectileBehaviour : MonoBehaviour
+    public class ProjectileBehaviour : MonoBehaviourPun
     {
         [SerializeField]
         private Material[] projectileMaterials;
